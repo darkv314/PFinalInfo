@@ -117,6 +117,10 @@ position = Vector2( 1520, 680 )
 wait_time = 16.0
 autostart = true
 
+[node name="win" type="Sprite" parent="."]
+
+[node name="loose" type="Sprite" parent="."]
+
 [connection signal="planted" from="." to="Row1" method="_on_Map_planted"]
 [connection signal="plant_entered" from="Row1" to="." method="_on_Row1_plant_entered"]
 [connection signal="plant_exited" from="Row1" to="." method="_on_Row_plant_exited"]

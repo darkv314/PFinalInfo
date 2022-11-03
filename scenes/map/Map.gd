@@ -26,10 +26,10 @@ var zombies = []
 var posPlant = Vector2.ZERO
 var plant
 onready var loose = $loose
-onready var resume = $resume
-onready var quit = $quit
-onready var play = $play
-onready var win = $Win
+#onready var resume = $resume
+#onready var quit = $quit
+#onready var play = $play
+onready var win = $win
 
 
 func _ready():
@@ -42,41 +42,31 @@ func _ready():
 	zombies.append(zombie1_path.instance())
 	zombies.append(zombie2_path.instance())
 	zombies.append(zombie3_path.instance())
-	zombies.append(zombie2_path.instance())
-#	loose.hide()
+	zombies.append(zombie4_path.instance())
+	zombies.append(zombie5_path.instance())
+	zombies.append(zombie3_path.instance())
+	loose.hide()
 #	resume.hide()
 #	quit.hide()
 #	play.hide()
-#	win.hide()
-
-#func _unhandled_input(event):
-#	if event.is_action_pressed("pause"):
-#		resume.show()
-#		resume.disabled = false
-#		quit.show()
-#		quit.disabled = false
-#		get_tree().paused = true
+	win.hide()
 
 func _process(delta):
-#	print(len(zombies))
-#	print(len(zombieList))
-
 	for z in zombieList:
 		if (z.is_done_dying):
 			zombieList.remove(zombieList.find(z))
 		if(z.position.x <= 350):
-#			loose.show()
+			loose.show()
 			get_tree().paused = true
 
 	if len(zombieList) == 0 and len(zombies) == 0:
-#		win.show()
+		win.show()
 		get_tree().paused = true
 
 
 
 func _on_ZombieGeneration_timeout():
 	zombie_generation = int(rand_range(0, 4))
-#	print(zombie_generation)
 	if(zombie_generation == 0 and len(zombies) != 0):
 		var zombie = zombies[0]
 		zombies.remove(0)
@@ -110,7 +100,6 @@ func _on_ZombieGeneration_timeout():
 		zombieList.append(zombie)
 		
 func handle_is_planted(pos):
-#	print(pos)
 	if pos == 270:
 		$Row1.plants.append(plant)
 	if pos == 380:
@@ -122,18 +111,10 @@ func handle_is_planted(pos):
 	if pos == 680:
 		$Row5.plants.append(plant)
 
-
-#func _on_resume_button_down():
-#	print('entro')
-#	resume.hide()
-#	quit.hide()
-#	get_tree().paused = false
 	
 func _input(event):
 	if event.is_action_pressed("click"):
 		if entered_m and int($Sunlabel.text) >= 350:
-#			plant = melon_path.instance()
-#			$Sunlabel.text = str(int($Sunlabel.text) - 350)
 			attackList.append(melon_path.instance())
 			var melon = attackList[attackList.size()-1]
 			melon.position = get_viewport().get_mouse_position()
@@ -143,8 +124,6 @@ func _input(event):
 			plant = melon
 			plant.connect("is_planted", self, "handle_is_planted")
 		if entered_p and int($Sunlabel.text) >= 100:
-#			plant = pea_path.instance()
-#			$Sunlabel.text = str(int($Sunlabel.text) - 100)
 			attackList.append(pea_path.instance())
 			var pea = attackList[attackList.size()-1]
 			pea.position = get_viewport().get_mouse_position()
@@ -154,28 +133,20 @@ func _input(event):
 			plant = pea
 			plant.connect("is_planted", self, "handle_is_planted")
 		if entered_s and int($Sunlabel.text) >= 50:
-#			plant = sun_path.instance()
-#			$Sunlabel.text = str(int($Sunlabel.text) - 50)
 			plantList.append(sun_path.instance())
 			var sunf = plantList[plantList.size()-1]
 			sunf.position = get_viewport().get_mouse_position()
 			sunf.first_click = true
 			add_child(sunf)
 			$Sunlabel.text = str(int($Sunlabel.text) - 50)
-#			plant = sunf
 		if entered_w and int($Sunlabel.text) >= 50:
-#			plant = sun_path.instance()
-#			$Sunlabel.text = str(int($Sunlabel.text) - 50)
 			plantList.append(wall_path.instance())
 			var wall = plantList[plantList.size()-1]
 			wall.position = get_viewport().get_mouse_position()
 			wall.first_click = true
 			add_child(wall)
 			$Sunlabel.text = str(int($Sunlabel.text) - 50)
-#			plant = sunf
 		if entered_r and int($Sunlabel.text) >= 200:
-#			plant = sun_path.instance()
-#			$Sunlabel.text = str(int($Sunlabel.text) - 50)
 			plantList.append(rep_path.instance())
 			var rep = plantList[plantList.size()-1]
 			rep.position = get_viewport().get_mouse_position()
@@ -185,8 +156,6 @@ func _input(event):
 			plant = rep
 			plant.connect("is_planted", self, "handle_is_planted")
 		if entered_sn and int($Sunlabel.text) >= 175:
-#			plant = sun_path.instance()
-#			$Sunlabel.text = str(int($Sunlabel.text) - 50)
 			plantList.append(snow_path.instance())
 			var snow = plantList[plantList.size()-1]
 			snow.position = get_viewport().get_mouse_position()
@@ -195,43 +164,25 @@ func _input(event):
 			$Sunlabel.text = str(int($Sunlabel.text) - 200)
 			plant = snow
 			plant.connect("is_planted", self, "handle_is_planted")
-#		plant.position = get_viewport().get_mouse_position()
-#		plant.first_click = true
-#		plant.connect("is_planted", self, "handle_is_planted")
-#		add_child(plant)
 
 func _on_quit_button_down():
 	get_tree().quit()
 
 func _on_Row1_plant_entered(pos):
 	posPlant = pos
-	
-#func _on_Row_plant_exited():
-#	posPlant = Vector2.ZERO
+
 
 func _on_Row2_plant_entered(pos):
 	posPlant = pos
-	
-#func _on_Row2_plant_exited():
-#	posPlant = Vector2.ZERO
 
 func _on_Row3_plant_entered(pos):
 	posPlant = pos
 
-#func _on_Row3_plant_exited():
-#	posPlant = Vector2.ZERO
-
 func _on_Row4_plant_entered(pos):
 	posPlant = pos
-	
-#func _on_Row4_plant_exited():
-#	posPlant = Vector2.ZERO
 
 func _on_Row5_plant_entered(pos):
 	posPlant = pos
-	
-#func _on_Row5_plant_exited():
-#	posPlant = Vector2.ZERO
 
 func _on_Peacard_mouse_entered():
 	entered_p = true
