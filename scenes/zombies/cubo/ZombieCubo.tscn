@@ -576,7 +576,7 @@ start_node = "walk1"
 extents = Vector2( 32.75, 26.5 )
 
 [sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 23, 58.5 )
+extents = Vector2( 17, 37.5 )
 
 [sub_resource type="RectangleShape2D" id=39]
 extents = Vector2( 32.5, 54 )
@@ -616,7 +616,7 @@ position = Vector2( 7, -16.5 )
 shape = SubResource( 11 )
 
 [node name="CollisionShape2D2" parent="Position2D/HitBox" index="1"]
-position = Vector2( 5, 8.5 )
+position = Vector2( -1, -12.5 )
 shape = SubResource( 12 )
 
 [node name="CollisionShape2D" parent="HurtMelon" index="0"]

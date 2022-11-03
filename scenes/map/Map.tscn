@@ -114,7 +114,7 @@ position = Vector2( 1520, 580 )
 position = Vector2( 1520, 680 )
 
 [node name="ZombieGeneration" type="Timer" parent="."]
-wait_time = 16.0
+wait_time = 20.0
 autostart = true
 
 [node name="win" type="Sprite" parent="."]

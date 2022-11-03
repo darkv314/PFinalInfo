@@ -3,7 +3,7 @@ extends Zombie
 func _ready():
 	hp = 65
 
-
+export var is_done_dying = false
 func _physics_process(delta):
 	if(hp <= 5):
 		animation = '2'
@@ -20,3 +20,5 @@ func _physics_process(delta):
 	if(terminar_comer):
 		velocity.x -= velocity_value
 		terminar_comer = false
+	if is_done_dying and die:
+		self.queue_free()

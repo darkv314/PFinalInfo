@@ -1,7 +1,7 @@
 extends Zombie
 
 func _ready():
-	hp = 25
+	hp = 80
 
 export var is_done_dying = false
 func _physics_process(delta):

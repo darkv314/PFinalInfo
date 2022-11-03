@@ -97,6 +97,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:is_done_dying")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "die1"
@@ -182,6 +194,18 @@ tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
 "times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:is_done_dying")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 1.95 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -614,7 +638,7 @@ start_node = "walk1"
 extents = Vector2( 22, 27.5 )
 
 [sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 29, 51.5 )
+extents = Vector2( 18, 33 )
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 29.5, 29 )
@@ -627,6 +651,7 @@ extents = Vector2( 37.5, 21.5 )
 
 [node name="KinematicBody2D" instance=ExtResource( 2 )]
 script = ExtResource( 6 )
+is_done_dying = false
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
@@ -656,7 +681,7 @@ position = Vector2( -13, -24.5 )
 shape = SubResource( 11 )
 
 [node name="CollisionShape2D2" parent="Position2D/HitBox" index="1"]
-position = Vector2( 4, 7.5 )
+position = Vector2( -7, -11 )
 shape = SubResource( 12 )
 
 [node name="PuertaBox" parent="." index="6" instance=ExtResource( 5 )]

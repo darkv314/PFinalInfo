@@ -1,7 +1,7 @@
 extends Zombie
 
 func _ready():
-	hp = 20
+	hp = 65
 
 export var is_done_dying = false
 
