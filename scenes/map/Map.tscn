@@ -1,0 +1,150 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scenes/map/Row.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/map/garden.png" type="Texture" id=2]
+[ext_resource path="res://assets/map/card_container.png" type="Texture" id=3]
+[ext_resource path="res://assets/plants/sunflower/sunflower_card.png" type="Texture" id=4]
+[ext_resource path="res://assets/plants/melonpult/melonpult_card.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/Roboto-Bold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://scenes/map/Card.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/plants/peashooter/peashooter_card.png" type="Texture" id=8]
+[ext_resource path="res://scenes/map/Map.gd" type="Script" id=9]
+[ext_resource path="res://assets/plants/wallnut/Wall-nutSeedPacket.png" type="Texture" id=10]
+[ext_resource path="res://assets/plants/repeater/RepeaterSeedPacket.png" type="Texture" id=11]
+[ext_resource path="res://assets/plants/SnowPea/SnowPeaSeedPacket.png" type="Texture" id=12]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 6 )
+
+[node name="Map" type="Node2D"]
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="Garden" type="Sprite" parent="."]
+scale = Vector2( 1.5, 1.05 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Topbar" type="Sprite" parent="."]
+position = Vector2( 350, 85 )
+scale = Vector2( 2.7, 2 )
+texture = ExtResource( 3 )
+
+[node name="Sunlabel" type="Label" parent="."]
+margin_left = 50.0
+margin_top = 111.0
+margin_right = 129.0
+margin_bottom = 162.0
+theme = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "50
+"
+align = 1
+
+[node name="Row1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 435, 270 )
+
+[node name="Row2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 435, 380 )
+
+[node name="Row3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 435, 480 )
+
+[node name="Row4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 435, 580 )
+
+[node name="Row5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 435, 680 )
+
+[node name="Suncard" parent="." instance=ExtResource( 7 )]
+position = Vector2( 210, 83 )
+
+[node name="Sprite" parent="Suncard" index="0"]
+texture = ExtResource( 4 )
+
+[node name="Peacard" parent="." instance=ExtResource( 7 )]
+position = Vector2( 295, 83 )
+
+[node name="Sprite" parent="Peacard" index="0"]
+texture = ExtResource( 8 )
+
+[node name="Meloncard" parent="." instance=ExtResource( 7 )]
+position = Vector2( 380, 83 )
+
+[node name="Sprite" parent="Meloncard" index="0"]
+texture = ExtResource( 5 )
+
+[node name="Wallcard" parent="." instance=ExtResource( 7 )]
+position = Vector2( 465, 83 )
+
+[node name="Sprite" parent="Wallcard" index="0"]
+texture = ExtResource( 10 )
+
+[node name="Repcard" parent="." instance=ExtResource( 7 )]
+position = Vector2( 550, 83 )
+
+[node name="Sprite" parent="Repcard" index="0"]
+texture = ExtResource( 11 )
+
+[node name="Snowcard" parent="." instance=ExtResource( 7 )]
+position = Vector2( 635, 83 )
+
+[node name="Sprite" parent="Snowcard" index="0"]
+texture = ExtResource( 12 )
+
+[node name="PZ1" type="Position2D" parent="."]
+position = Vector2( 1520, 270 )
+
+[node name="PZ2" type="Position2D" parent="."]
+position = Vector2( 1520, 380 )
+
+[node name="PZ3" type="Position2D" parent="."]
+position = Vector2( 1520, 480 )
+
+[node name="PZ4" type="Position2D" parent="."]
+position = Vector2( 1520, 580 )
+
+[node name="PZ5" type="Position2D" parent="."]
+position = Vector2( 1520, 680 )
+
+[node name="ZombieGeneration" type="Timer" parent="."]
+wait_time = 16.0
+autostart = true
+
+[connection signal="planted" from="." to="Row1" method="_on_Map_planted"]
+[connection signal="plant_entered" from="Row1" to="." method="_on_Row1_plant_entered"]
+[connection signal="plant_exited" from="Row1" to="." method="_on_Row_plant_exited"]
+[connection signal="plant_entered" from="Row2" to="." method="_on_Row2_plant_entered"]
+[connection signal="plant_exited" from="Row2" to="." method="_on_Row2_plant_exited"]
+[connection signal="plant_entered" from="Row3" to="." method="_on_Row3_plant_entered"]
+[connection signal="plant_exited" from="Row3" to="." method="_on_Row3_plant_exited"]
+[connection signal="plant_entered" from="Row4" to="." method="_on_Row4_plant_entered"]
+[connection signal="plant_exited" from="Row4" to="." method="_on_Row4_plant_exited"]
+[connection signal="plant_entered" from="Row5" to="." method="_on_Row5_plant_entered"]
+[connection signal="plant_exited" from="Row5" to="." method="_on_Row5_plant_exited"]
+[connection signal="mouse_entered" from="Suncard" to="." method="_on_Suncard_mouse_entered"]
+[connection signal="mouse_exited" from="Suncard" to="." method="_on_Suncard_mouse_exited"]
+[connection signal="mouse_entered" from="Peacard" to="." method="_on_Peacard_mouse_entered"]
+[connection signal="mouse_exited" from="Peacard" to="." method="_on_Peacard_mouse_exited"]
+[connection signal="mouse_entered" from="Meloncard" to="." method="_on_Meloncard_mouse_entered"]
+[connection signal="mouse_exited" from="Meloncard" to="." method="_on_Meloncard_mouse_exited"]
+[connection signal="mouse_entered" from="Wallcard" to="." method="_on_Wallcard_mouse_entered"]
+[connection signal="mouse_exited" from="Wallcard" to="." method="_on_Wallcard_mouse_exited"]
+[connection signal="mouse_entered" from="Repcard" to="." method="_on_Repcard_mouse_entered"]
+[connection signal="mouse_exited" from="Repcard" to="." method="_on_Repcard_mouse_exited"]
+[connection signal="mouse_entered" from="Snowcard" to="." method="_on_Snowcard_mouse_entered"]
+[connection signal="mouse_exited" from="Snowcard" to="." method="_on_Snowcard_mouse_exited"]
+[connection signal="timeout" from="ZombieGeneration" to="." method="_on_ZombieGeneration_timeout"]
+
+[editable path="Suncard"]
+[editable path="Peacard"]
+[editable path="Meloncard"]
+[editable path="Wallcard"]
+[editable path="Repcard"]
+[editable path="Snowcard"]

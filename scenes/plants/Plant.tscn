@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/plants/Plant.gd" type="Script" id=1]
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "idle"
+
+[sub_resource type="AnimationNodeStateMachine" id=1]
+states/idle/node = SubResource( 5 )
+states/idle/position = Vector2( 557, 84 )
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[sub_resource type="RectangleShape2D" id=4]
+
+[sub_resource type="RectangleShape2D" id=6]
+
+[node name="Plant" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 1 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 2 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+
+[node name="HCollision" type="CollisionShape2D" parent="Hurtbox"]
+scale = Vector2( 3.5, 3.5 )
+shape = SubResource( 3 )
+
+[node name="Damage" type="Timer" parent="."]
+
+[node name="WPlant" type="CollisionShape2D" parent="."]
+scale = Vector2( 3.5, 3.5 )
+shape = SubResource( 4 )
+
+[node name="SquarePlant" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquarePlant"]
+scale = Vector2( 3.5, 3.5 )
+shape = SubResource( 6 )
+
+[connection signal="mouse_entered" from="." to="." method="_on_Plant_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Plant_mouse_exited"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]
+[connection signal="timeout" from="Damage" to="." method="_on_Damage_timeout"]

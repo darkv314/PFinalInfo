@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/plants/Plant.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/plants/shootPlant/ShootPlant.gd" type="Script" id=2]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[node name="ShootPlant" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="AnimationTree" parent="." index="2"]
+parameters/playback = SubResource( 1 )
+
+[node name="ShootTimer" type="Timer" parent="." index="6"]
+wait_time = 2.0
+
+[node name="ProjectileSpawn" type="Position2D" parent="." index="7"]
+position = Vector2( 25, -25 )
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

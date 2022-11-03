@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/plants/shootPlant/peashooter/Peashooter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/plants/shootPlant/repeater/Repeater.gd" type="Script" id=2]
+[ext_resource path="res://assets/plants/repeater/repeater.png" type="Texture" id=3]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[node name="Repeater" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="AnimationTree" parent="." index="2"]
+parameters/playback = SubResource( 1 )
+
+[node name="ShootTimer" parent="." index="6"]
+wait_time = 1.5
+
+[node name="SecondShoot" type="Timer" parent="." index="9"]
+wait_time = 0.3
+
+[connection signal="timeout" from="SecondShoot" to="." method="_on_SecondShoot_timeout"]

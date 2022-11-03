@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/plants/shootPlant/peashooter/Peashooter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/plants/SnowPea/snow.png" type="Texture" id=2]
+[ext_resource path="res://scenes/plants/shootPlant/snowpea/SnowPea.gd" type="Script" id=3]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 1.7
+loop = true
+step = 0.087
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.087, 0.174, 0.261, 0.348, 0.435, 0.522, 0.609, 0.696, 0.783, 0.87, 0.957, 1.044, 1.131, 1.218, 1.305, 1.392, 1.479, 1.566, 1.653 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 19 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle"
+
+[sub_resource type="AnimationNodeStateMachine" id=2]
+states/idle/node = SubResource( 6 )
+states/idle/position = Vector2( 545, 111 )
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
+
+[node name="SnowPea" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+vframes = 4
+
+[node name="AnimationTree" parent="." index="2"]
+active = false
+parameters/playback = SubResource( 1 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="9"]
+anims/RESET = SubResource( 4 )
+anims/idle = SubResource( 5 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="10"]
+tree_root = SubResource( 2 )
+anim_player = NodePath("../AnimationPlayer2")
+active = true
+parameters/playback = SubResource( 3 )

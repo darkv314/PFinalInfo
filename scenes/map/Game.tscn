@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/map/maxresdefault.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/Roboto-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/map/MainMenu.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 3 )
+
+[node name="Game" type="Node2D"]
+
+[node name="MainMenu" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="MainMenu"]
+position = Vector2( -153, 2 )
+scale = Vector2( 1.45469, 1.25417 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Button" type="Button" parent="MainMenu"]
+margin_left = 781.0
+margin_top = 141.0
+margin_right = 1431.0
+margin_bottom = 252.0
+custom_fonts/font = SubResource( 1 )
+text = "PLAY"
+
+[connection signal="button_down" from="MainMenu/Button" to="MainMenu" method="_on_Button_button_down"]
